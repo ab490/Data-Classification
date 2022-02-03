@@ -20,3 +20,9 @@ b. Classification accuracy for each K.
 
 4. Compared the best result of KNN classifier, best result of KNN classifier on normalised data, and result of Bayes classifier using unimodal Gaussian density. 
 
+5. Built a Bayes classifier with multi-modal Gaussian distribution (GMM) with Q Gaussian components (modes) as class conditional density for each class on the training data seismic-bumps-train.csv.\
+a. Found confusion matrix for each Q.\
+b. Found the classification accuracy for each Q. 
+
+6. Compared the best result of KNN classifier, best result of KNN classifier on normalised data, result of Bayes classifier using unimodal Gaussian density and Bayes classifier using GMM.
+
