@@ -1,6 +1,5 @@
 #Name: Anooshka Bajaj
-#Registration Number: b19004
-#Mobile Number: 9501902410
+
 
 import pandas as pd
 df=pd.read_csv(r'E:\seismic_bumps1.csv',usecols=['seismic','seismoacoustic','shift','genergy','gpuls', 'gdenergy','gdpuls','ghazard','energy','maxenergy','class'])
