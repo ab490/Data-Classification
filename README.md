@@ -8,12 +8,12 @@ This dataset contains recorded features from the seismic activity in the rock ma
 
 I have written a python program to split the data of each class from seismic-bumps.csv into train data and test data and classified every test tuple using K-nearest neighbor (KNN) method for the different values of K=1, 3, and 5. 
 
-1. I performed the following analysis: 
-a. Confusion matrix for each K.
+1. I performed the following analysis:\
+a. Confusion matrix for each K.\
 b. Classification accuracy for each K. 
 
-2. Normalised the data and found the:
-a. Confusion matrix for each K.
+2. Normalised the data and found the:\
+a. Confusion matrix for each K.\
 b. Classification accuracy for each K. 
 
 3. Built a Bayes classifier (with unimodal Gaussian density used to model the distribution of the data) on the training data seismic-bumps-train.csv. Then tested the performance on seismic-bumps-test.csv and determined confusion matrix and accuracy.
