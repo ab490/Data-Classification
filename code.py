@@ -2,6 +2,7 @@
 
 
 import pandas as pd
+
 df=pd.read_csv(r'E:\seismic_bumps1.csv',usecols=['seismic','seismoacoustic','shift','genergy','gpuls', 'gdenergy','gdpuls','ghazard','energy','maxenergy','class'])
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -112,6 +113,51 @@ best_result['Bayes classifier'] = [metrics.accuracy_score(Y_test,Y_Predicted)]
 #4
 #printing best_result dictionary as a dataframe
 print(pd.DataFrame(best_result,index = ['Accuracy']).transpose())
+
+
+#5
+X_train = pd.read_csv(r'C:\Users\HP\seismic_bumps_train.csv')
+X_test = pd.read_csv(r'C:\Users\HP\seismic_bumps_test.csv')
+
+#5(a)
+q =[2,4,8,16]
+Q = 0
+accuracy_scores =[]
+for k in q:
+    X_0_train = X_train[X_train['class']==0]
+    X_1_train = X_train[X_train['class']==1]
+    prior = len(X_0_train)/(len(X_0_train)+len(X_1_train))
+    p = 1-prior
+    gmm1 = GaussianMixture(n_components = k,random_state=42)
+    gmm1.fit(X_0_train.iloc[:,:-1])
+    score1 = np.exp(gmm1.score_samples(X_test.iloc[:,:-1]))
+
+    gmm2 = GaussianMixture(n_components = k,random_state=42)
+    gmm2.fit(X_1_train.iloc[:,:-1])
+    score2 = np.exp(gmm2.score_samples(X_test.iloc[:,:-1]))    
+    pred = []
+    for i,j in zip(score1,score2):
+        if i*prior>j*p:
+            pred.append(0)
+        else:
+            pred.append(1)
+
+    s = accuracy_score(X_test['class'],pred)
+    accuracy_scores.append(s)
+    print("\nQ =",k)
+    print("Accuracy score=",s)
+    print("Confusion matrix:")
+    print(confusion_matrix(X_test['class'],pred))
+    
+if accuracy_scores.index(max(accuracy_scores)) == 0:
+    print("Q for high accuracy is ",2)
+if accuracy_scores.index(max(accuracy_scores))== 1:
+    print("Q for high accuracy is ",4)
+if accuracy_scores.index(max(accuracy_scores))== 2:
+    print("Q for high accuracy is ",8)
+else:
+    print("Q for high accuracy is ",16)
+
 
 
 
